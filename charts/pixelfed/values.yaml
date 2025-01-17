@@ -56,6 +56,8 @@ service:
   type: ClusterIP
   # -- This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
   port: 80
+  # -- Port to attach to on the pods. Also sets what port nginx listens on inside the container.
+  targetPort: 80
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -204,7 +206,7 @@ valkey:
       enabled: true
       existingClaim: ""
 
-  # persistnent volume retention policy for the StatefulSet
+  # persistent volume retention policy for the StatefulSet
   persistentVolumeClaimRetentionPolicy:
     enabled: true
     whenScaled: Retain
@@ -231,7 +233,7 @@ postgresql:
 
 pixelfed:
   # -- Automatically run [artisan migrate --force] if new migrations are detected.
-  db_apply_new_migrations_automatically: false
+  db_apply_new_migrations_automatically: true
 
   # -- timezone for docker container
   timezone: "europe/amsterdam"
