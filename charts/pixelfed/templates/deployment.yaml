@@ -56,7 +56,13 @@ spec:
             - name: APP_DOMAIN
               value: {{ . }}
             {{- end }}
-
+            {{- if .Values.pixelfed.app.key.existingSecret.name }}
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .Values.pixelfed.app.key.existingSecret.key }}
+                  name: {{ .Values.pixelfed.app.key.existingSecret.name }}
+            {{- end }}
             # registration related
             - name: OPEN_REGISTRATION
               value: {{ .Values.pixelfed.open_registration | quote }}

@@ -271,6 +271,11 @@ pixelfed:
     locale: "en"
     # -- The domain of your server, without https://
     domain: ""
+    # -- the secret which your application encryption key is stored in. This can only be generated from within the container
+    key:
+      existingSecret:
+        name: ""
+        key: ""
 
   # -- Enable open registration for new accounts
   open_registration: true
